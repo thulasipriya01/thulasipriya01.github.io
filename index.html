@@ -81,6 +81,16 @@
                 "title": "website",
                 "required": "true"
             },
+            "Title": {
+                "type": "string",
+                "title": "Title",
+                "required": "true"
+            },
+            "subtitle": {
+                "type": "string",
+                "title": "subtitle",
+                "required": "true"
+            },
             "cgpa": {
                 "type": "range",
                 "title": "cgpa",
@@ -94,7 +104,8 @@
 
         function saveFile() {
             let data =
-                '\r Name: ' + document.getElementById("myform").elements[0].value + ' \r\n ' +
+                '\r'+ document.getElementById("myform").elements[11].value + ' \r\n '+document.getElementById("myform").elements[12].value+      
+                'Name: ' + document.getElementById("myform").elements[0].value + ' \r\n ' +
                 'Age: ' + document.getElementById("myform").elements[1].value + ' \r\n ' +
                 'Country: ' + document.getElementById("myform").elements[2].value + ' \r\n ' +
                 'DOB: ' + document.getElementById("myform").elements[3].value + ' \r\n ' +
@@ -105,7 +116,7 @@
                 'email: ' + document.getElementById("myform").elements[8].value + ' \r\n ' +
                 'start time: ' + document.getElementById("myform").elements[9].value + ' \r\n ' +
                 'website: ' + document.getElementById("myform").elements[10].value + ' \r\n ' +
-                'cgpa: ' + document.getElementById("myform").elements[11].value + ' \r\n ';
+                'cgpa: ' + document.getElementById("myform").elements[13].value + ' \r\n ';
 
 
             const textToBLOB = new Blob([data], {
