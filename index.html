@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Generate form using JSON object</title>
+    <link rel="stylesheet" type="text/css" href="deps/opt/bootstrap.css" />
+    <script type="text/javascript" src="deps/jquery.min.js"></script>
+    <script type="text/javascript" src="deps/underscore.js"></script>
+    <script type="text/javascript" src="deps/opt/jsv.js"></script>
+    <script type="text/javascript" src="lib/jsonform.js"></script>
+</head>
+
+<body>
+
+    <form id="myform" onsubmit="saveFile()"></form>
+
+    <div id="res" class="alert"></div>
+    <script type="text/javascript">
+        var data = {
+            "name": {
+                "type": "string",
+                "title": "Name",
+                "required": "true"
+            },
+            "age": {
+                "type": "number",
+                "title": "Age",
+                "required": "true"
+            },
+            "country": {
+                "type": "string",
+                "title": "Country",
+                "enum": [
+                    "India",
+                    "West Indies",
+                    "Australia"
+                ],
+                "required": "true"
+            },
+            "DOB": {
+                "type": "date",
+                "title": "Date of Birth",
+                "required": "true"
+            },
+            "gender": {
+                "type": "choice",
+                "title": "gender",
+                "enum": ["male", "female", "prefer not to say"],
+                "required": "true"
+            },
+            "langauges": {
+                "type": "choice",
+                "title": "languages known",
+                "enum": ["python", "java", "C", "C++"],
+                "required": "true"
+            },
+            "color": {
+                "type": "color",
+                "title": "favourite color",
+                "default": "#000000",
+                "required": "true"
+            },
+            "pic": {
+                "type": "file",
+                "title": "upload your photo",
+                "required": "true"
+            },
+            "email": {
+                "type": "email",
+                "title": "Email",
+                "required": "true"
+            },
+            "time": {
+                "type": "time",
+                "title": "start time",
+                "required": "true"
+            },
+            "website": {
+                "type": "url",
+                "title": "website",
+                "required": "true"
+            },
+            "cgpa": {
+                "type": "range",
+                "title": "cgpa",
+                "required": "true"
+            }
+        };
+        $('form').jsonForm({
+            schema: data,
+
+        });
+
+        function saveFile() {
+            let data =
+                '\r Name: ' + document.getElementById("myform").elements[0].value + ' \r\n ' +
+                'Age: ' + document.getElementById("myform").elements[1].value + ' \r\n ' +
+                'Country: ' + document.getElementById("myform").elements[2].value + ' \r\n ' +
+                'DOB: ' + document.getElementById("myform").elements[3].value + ' \r\n ' +
+                'Gender: ' + document.getElementById("myform").elements[4].value + ' \r\n ' +
+                'languages: ' + document.getElementById("myform").elements[5].value + ' \r\n ' +
+                'favourite color: ' + document.getElementById("myform").elements[6].value + ' \r\n ' +
+                'photo: ' + document.getElementById("myform").elements[7].value + ' \r\n ' +
+                'email: ' + document.getElementById("myform").elements[8].value + ' \r\n ' +
+                'start time: ' + document.getElementById("myform").elements[9].value + ' \r\n ' +
+                'website: ' + document.getElementById("myform").elements[10].value + ' \r\n ' +
+                'cgpa: ' + document.getElementById("myform").elements[11].value + ' \r\n ';
+
+
+            const textToBLOB = new Blob([data], {
+                type: 'text/plain'
+            });
+            const sFileName = document.getElementById("myform").elements[0].value + '.txt';
+
+            let newLink = document.createElement("a");
+            newLink.download = sFileName;
+
+            if (window.webkitURL != null) {
+                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+            } else {
+                newLink.href = window.URL.createObjectURL(textToBLOB);
+                newLink.style.display = "none";
+                document.body.appendChild(newLink);
+            }
+
+            newLink.click();
+        }
+    </script>
+</body>
+
+</html>
